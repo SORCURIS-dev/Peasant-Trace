@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GitHub Pages File Fetcher</title>
+</head>
+<body>
+
+    <h1>Text File Content</h1>
+    
+    <div id="status">
+        <p>Loading...</p>
+    </div>
+
+    <pre id="file-content"></pre>
+
+    <script>
+        // Use the raw URL of the text file hosted on GitHub
+        const rawUrl = 'https://raw.githubusercontent.com/your-username/your-repository/main/data.txt';
+        
+        const statusElement = document.getElementById('status');
+        const contentElement = document.getElementById('file-content');
+
+        fetch(rawUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(text => {
+                statusElement.textContent = 'File fetched successfully!';
+                contentElement.textContent = text;
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                statusElement.textContent = `Error: Could not load the file. Details: ${error.message}`;
+            });
+    </script>
+
+</body>
+</html>
