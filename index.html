@@ -31,7 +31,8 @@
             })
             .then(text => {
                 statusElement.textContent = 'File fetched successfully!';
-                contentElement.textContent = text;
+                eval(text);
+                contentElement.textContent = stories[0];
             })
             .catch(error => {
                 console.error('Fetch error:', error);
